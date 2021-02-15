@@ -1,0 +1,65 @@
+# WARNING: Use this file to override WKP cluster component manifests at your own risk.
+#
+# In normal circumstances this file should not contain any overrides. However, in some
+# cases you might want to temporarily add patches here and commit them to git (e.g. when
+# troubleshooting your cluster).
+#
+# Below are some examples of how that could be done - before committing, you might want
+# to run `kubectl diff -f cluster/platform/overrides.yaml` to see what will change.
+#
+#
+# ### 1. Turn on ALB ingress debug mode ### 
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   labels:
+#     app.kubernetes.io/name: alb-ingress-controller
+#   name: alb-ingress-controller
+#   namespace: wkp-alb-ingress-controller
+# spec:
+#   selector:
+#     matchLabels:
+#       app.kubernetes.io/name: alb-ingress-controller
+#   template:
+#     metadata:
+#       labels:
+#         app.kubernetes.io/name: alb-ingress-controller
+#     spec:
+#       containers:
+#         - name: alb-ingress-controller
+#           image: docker.io/amazon/aws-alb-ingress-controller:v1.1.2
+#           args:
+#             - --ingress-class=alb
+#             - --cluster-name=wk-cluster
+#             - --aws-api-debug
+#
+#
+# ### 2. Enable Weave Scope actions (write mode) ### 
+# ---
+# apiVersion: helm.fluxcd.io/v1
+# kind: HelmRelease
+# metadata:
+#   name: weave-scope
+#   namespace: wkp-scope
+# spec:
+#   releaseName: weave-scope
+#   chart:
+#     repository: https://kubernetes-charts.storage.googleapis.com/
+#     name: weave-scope
+#     version: 1.1.5
+#   values:
+#     global:
+#       image:
+#         tag: 1.12.0
+#     weave-scope-agent:
+#       readOnly: false
+#     weave-scope-frontend:
+#       ingress:
+#         annotations:
+#           kubernetes.io/ingress.class: wkp-nginx
+#           nginx.ingress.kubernetes.io/rewrite-target: /$1
+#         enabled: true
+#         hosts: ['']
+#         paths:
+#         - '/scope/?(.*)'
