@@ -1,7 +1,7 @@
 gitopsParams:
   git:
-    url: git@github.com:weaveworks/wkp-core # GIT URL PLACEHOLDER
+    url: git@github.com:cdavisafc/staging-cluster-config.git # GIT URL PLACEHOLDER
     branch: master # GIT BRANCH PLACEHOLDER
-    path: # GIT PATH PLACEHOLDER
+    path: /cluster/platform # GIT PATH PLACEHOLDER
   images:
-    clusterComponents: # CLUSTER COMPONENTS IMAGE PLACEHOLDER
+    clusterComponents: docker.io/weaveworks/wkp-cluster-components:master-c6ecc1a9 # CLUSTER COMPONENTS IMAGE PLACEHOLDER

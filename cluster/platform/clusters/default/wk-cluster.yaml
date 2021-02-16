@@ -1,9 +1,9 @@
 apiVersion: infrastructure.eksctl.io/v1alpha5
 kind: EKSCluster
 metadata:
-  name: wk-cluster # set the AWS cluster name here
+  name: staging-cluster # set the AWS cluster name here
 spec:
-  region: eu-north-1 # set the AWS region here
+  region: us-west-2 # set the AWS region here
   cloudWatch:
     clusterLogging:
       enableTypes:
@@ -25,5 +25,6 @@ spec:
       withAddonPolicies:
         albIngress: true
     instanceType: m5.large
-    name: ng-1
-  version: "1.14"
+    name: ng-0
+  managedNodeGroupFile: 
+  version: '1.18'
