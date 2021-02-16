@@ -3,7 +3,7 @@ kind: EKSCluster
 metadata:
   name: staging-cluster # set the AWS cluster name here
 spec:
-  region: us-west-1 # set the AWS region here
+  region: us-east-1 # set the AWS region here
   cloudWatch:
     clusterLogging:
       enableTypes:

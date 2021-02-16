@@ -110,7 +110,7 @@ enabledFeatures:
 eksConfig:
   # AWS region in which to create the cluster
   # [REQUIRED]
-  clusterRegion: us-west-1
+  clusterRegion: us-east-1
 
   # Defines the version of Kubernetes installed on each node.
   # Supported versions: `'1.16'`, `'1.17'`, `'1.18'`
