@@ -1,0 +1,23 @@
+apiVersion: wkp.weave.works/v1beta1
+kind: Workspace
+metadata:
+  creationTimestamp: null
+  name: team-echo-workspace
+  namespace: wkp-workspaces
+spec:
+  clusterScope:
+    namespaces:
+    - name: team-echo-ns
+    networkPolicy: workspace-isolation
+    role: namespace-admin
+  gitProvider:
+    hostname: github.com
+    tokenRef:
+      name: github-token
+    type: github
+  gitRepository:
+    name: team-echo-workspace
+    owner: wkp-demo
+    teams:
+    - team-echo
+  interval: 1m0s
